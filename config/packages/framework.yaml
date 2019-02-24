@@ -5,7 +5,7 @@ framework:
     trusted_hosts: ~
     session:
         # With this config, PHP's native session handling is used
-        handler_id: ession.handler.memcached
+        handler_id: session.handler.memcached
         cookie_secure: auto
         cookie_samesite: lax
     # When using the HTTP Cache, ESI allows to render page fragments separately
