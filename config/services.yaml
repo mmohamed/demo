@@ -13,10 +13,10 @@ services:
     memcached.session:
         class: Memcached
         factory: Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection
-        arguments: ['%memcached.servers%', '%memcached.session_config%']
+        arguments: ['%memcached.servers%', '%memcached.config%']
     session.handler.memcached:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
-        arguments: ['@memcached.session', { prefix: '%memcached.session_prefix%', expiretime: '%memcached.session_expire%' }]
+        arguments: ['@memcached.session', { prefix: 'PHPSESSIONID', expiretime: '1200' }]
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
