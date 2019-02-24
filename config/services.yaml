@@ -5,8 +5,18 @@ parameters:
     # This parameter defines the codes of the locales (languages) enabled in the application
     app_locales: en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr|zh_CN|bg|tr
     app.notifications.email_sender: anonymous@example.com
-
+    memcached.servers:
+        - memcached://memcached1:11211
+        - memcached://memcached2:11211
+    memcached.config: {distribution: 'consistent', compression: true}
 services:
+    memcached.session:
+        class: Memcached
+        factory: Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection
+        arguments: ['%memcached.servers%', '%memcached.session_config%']
+    session.handler.memcached:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        arguments: ['@memcached.session', { prefix: '%memcached.session_prefix%', expiretime: '%memcached.session_expire%' }]
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
