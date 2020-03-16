@@ -6,7 +6,7 @@ parameters:
     app_locales: en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr|zh_CN|bg|tr
     app.notifications.email_sender: anonymous@example.com
     memcached.servers:
-        - memcached://memcached:11211
+        - '%env(string:MEMCACHED_URI)%' #memcached://memcached:11211
     memcached.config: {distribution: 'consistent', compression: true}
 services:
     memcached.session:
