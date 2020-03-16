@@ -7,6 +7,7 @@ parameters:
     env(DATABASE_PASSWORD): ''
     env(DATABASE_NAME): ''
     env(DATABASE_PORT): ''
+    env(DATABASE_HOST): ''
 
 doctrine:
     dbal:
